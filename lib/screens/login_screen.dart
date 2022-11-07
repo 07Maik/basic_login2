@@ -1,123 +1,82 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/custom_clippers_widget.dart';
+import '../widgets/login_button_widget.dart';
+import '../widgets/login_input_widget.dart';
+
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          banner(),
-        ],
+      body: SafeArea(
+        child: Column(
+          children: [background(), form()],
+        ),
       ),
     );
   }
 
-  Widget banner() {
+  Widget background() {
+    const textStyle = TextStyle(
+        fontSize: 30, fontWeight: FontWeight.w700, color: Colors.white);
+
     return Stack(
       children: [
         ClipPath(
-          clipper: WaveClipper2(),
+          clipper: WaveClipperThin(),
           child: Container(
-            // width: 400,
-            height: 300,
-            decoration: BoxDecoration(
-                gradient: LinearGradient(colors: [Color(0x44ff3a5a), Color(0x44fe494d)])),
-          ),
-        ),
-        ClipPath(
-          clipper: WaveClipper1(),
-          child: Container(
-            // width: 400,
             height: 300,
             decoration: const BoxDecoration(
                 gradient: LinearGradient(
+                    colors: [Color(0x44ff3a5a), Color(0x44fe494d)])),
+          ),
+        ),
+        ClipPath(
+          clipper: WaveClipperBroad(),
+          child: Container(
+            height: 300,
+            decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                    colors: [Color(0x22ff3a5a), Color(0x22fe494d)])),
+          ),
+        ),
+        ClipPath(
+          clipper: WaveClipperMain(),
+          child: Container(
+            padding: const EdgeInsets.only(top: 40),
+            height: 300,
+            width: double.infinity,
+            decoration: const BoxDecoration(
+                gradient: LinearGradient(
                     colors: [Color(0xffff3a5a), Color(0xfffe494d)])),
+            child: Column(
+              children: const [
+                Icon(Icons.fastfood, size: 60, color: Colors.white),
+                SizedBox(height: 20),
+                Text('Taste Me', style: textStyle)
+              ],
+            ),
           ),
         ),
       ],
     );
   }
 
-  form() {}
-}
-
-class WaveClipper1 extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    Path path = Path();
-
-    path.lineTo(0, size.height);
-    // path.quadraticBezierTo(size, y1, x2, y2)
-    path.cubicTo(
-      size.width * 0.4,
-      size.height - 100,
-      size.width * 0.65,
-      size.height,
-      size.width,
-      size.height - 20,
+  Widget form() {
+    return Container(
+      padding: const EdgeInsets.all(25),
+      child: Form(
+          child: Column(
+        children: const [
+          LoginInput(hintText: 'Email', icon: Icons.email),
+          SizedBox(height: 30.0),
+          LoginInput(hintText: 'Password', icon: Icons.lock),
+          SizedBox(height: 30.0),
+          LoginButton()
+        ],
+      )),
     );
-    path.lineTo(size.width, size.height);
-    path.lineTo(size.width, 0);
-
-    return path;
   }
-
-  @override
-  bool shouldReclip(covariant CustomClipper<Path> oldClipper) => false;
-}
-
-class WaveClipper2 extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    Path path = Path();
-
-    path.lineTo(0, size.height);
-    // path.quadraticBezierTo(size, y1, x2, y2)
-    path.cubicTo(
-      size.width * 0.25,
-      size.height - 100,
-      
-      size.width * 0.70,
-      size.height + 20,
-
-      size.width,
-      size.height - 2,
-    );
-    path.lineTo(size.width, size.height);
-    path.lineTo(size.width, 0);
-
-    return path;
-  }
-
-  @override
-  bool shouldReclip(covariant CustomClipper<Path> oldClipper) => false;
-}
-
-class WaveClipper3 extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    Path path = Path();
-
-    path.lineTo(0, size.height);
-    // path.quadraticBezierTo(size, y1, x2, y2)
-    path.cubicTo(
-      size.width * 0.25,
-      size.height - 100,
-      
-      size.width * 0.70,
-      size.height + 20,
-
-      size.width,
-      size.height - 2,
-    );
-    path.lineTo(size.width, size.height);
-    path.lineTo(size.width, 0);
-
-    return path;
-  }
-
-  @override
-  bool shouldReclip(covariant CustomClipper<Path> oldClipper) => false;
 }
