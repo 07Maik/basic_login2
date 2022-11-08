@@ -10,10 +10,14 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [background(), form()],
-        ),
+      backgroundColor: Colors.white,
+      body: Column(
+        children: [
+          background(),
+          form(),
+          const Spacer(),
+          singUp(),
+        ],
       ),
     );
   }
@@ -74,9 +78,37 @@ class LoginScreen extends StatelessWidget {
           SizedBox(height: 30.0),
           LoginInput(hintText: 'Password', icon: Icons.lock),
           SizedBox(height: 30.0),
-          LoginButton()
+          LoginButton(),
+          SizedBox(
+            height: 20,
+          ),
+          Text('FORGET PASSWORD ?',
+              style: TextStyle(
+                  color: Color(0xfffe494d),
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600)),
         ],
       )),
     );
+  }
+
+  Container singUp() {
+    return Container(
+        alignment: Alignment.center,
+        height: 90,
+        child: const Text.rich(TextSpan(
+          children: [
+            TextSpan(
+                text: 'Don\'t have an Account ?',
+                style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400)),
+            TextSpan(
+              text: ' Sign Up',
+              style: TextStyle(
+                  color: Color(0xfffe494d),
+                  fontSize: 15,
+                  decoration: TextDecoration.underline),
+            )
+          ],
+        )));
   }
 }

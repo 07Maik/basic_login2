@@ -17,7 +17,10 @@ class LoginButton extends StatelessWidget {
           alignment: Alignment.center,
           width: double.infinity,
           height: 50,
-          child: const Text('Login'),
+          child: const Text(
+            'Login',
+            style: TextStyle(fontSize: 18),
+          ),
         ));
   }
 }
